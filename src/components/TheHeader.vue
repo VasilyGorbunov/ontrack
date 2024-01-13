@@ -1,6 +1,8 @@
 <script setup>
 import TheLogo from "@/components/TheLogo.vue";
 import TheHeaderProgress from "@/components/TheHeaderProgress.vue";
+
+const emit = defineEmits(['goToTimeline', 'goToProgress'])
 </script>
 
 <template>
@@ -14,7 +16,7 @@ import TheHeaderProgress from "@/components/TheHeaderProgress.vue";
             border-b
             bg-white
             p-3">
-    <TheLogo/>
-    <TheHeaderProgress/>
+    <TheLogo @click="emit('goToTimeline')"/>
+    <TheHeaderProgress @click="emit('goToProgress')"/>
   </header>
 </template>
