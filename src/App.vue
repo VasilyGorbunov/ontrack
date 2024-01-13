@@ -6,15 +6,7 @@ import TheNav from "@/components/TheNav.vue";
 import TheTimeline from "@/pages/TheTimeline.vue";
 import TheActivities from "@/pages/TheActivities.vue";
 import TheProgress from "@/pages/TheProgress.vue";
-
-function normalizePageHash() {
-  const hash = window.location.hash.slice(1)
-  if ([PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE].includes(hash)) {
-    return hash
-  }
-  window.location.hash = PAGE_TIMELINE
-  return PAGE_TIMELINE
-}
+import {normalizePageHash} from "@/functions.js";
 
 const currentPage = ref(normalizePageHash())
 
