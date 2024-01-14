@@ -5,7 +5,10 @@ import {NAV_ITEMS} from "@/constants.js";
 defineProps({
   currentPage: {
     type: String,
-    required: true
+    required: true,
+    validator(currentPage) {
+      return Object.keys(NAV_ITEMS).includes(currentPage)
+    }
   }
 })
 
