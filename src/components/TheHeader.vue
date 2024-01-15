@@ -1,8 +1,12 @@
 <script setup>
 import TheLogo from "@/components/TheLogo.vue";
 import TheHeaderProgress from "@/components/TheHeaderProgress.vue";
+import {isPageValid} from "@/validators.js";
+import {PAGE_PROGRESS, PAGE_TIMELINE} from "@/constants.js";
 
-const emit = defineEmits(['goToTimeline', 'goToProgress'])
+const emit = defineEmits({
+  navigate: isPageValid
+})
 </script>
 
 <template>
@@ -16,7 +20,7 @@ const emit = defineEmits(['goToTimeline', 'goToProgress'])
             border-b
             bg-white
             p-3">
-    <TheLogo @click="emit('goToTimeline')"/>
-    <TheHeaderProgress @click="emit('goToProgress')"/>
+    <TheLogo @click="emit('navigate', PAGE_TIMELINE)"/>
+    <TheHeaderProgress @click="emit('navigate', PAGE_PROGRESS)"/>
   </header>
 </template>
