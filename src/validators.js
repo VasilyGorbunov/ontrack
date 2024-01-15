@@ -28,7 +28,7 @@ function isSelectOptionValid({value, label}) {
     return isNumber(value) && isString(label)
 }
 
-function isHourValid(hour) {
+export function isHourValid(hour) {
     return isNumber(hour) && isBetween(hour, MIDNIGHT_HOUR, HOURS_IN_DAY - 1)
 }
 
