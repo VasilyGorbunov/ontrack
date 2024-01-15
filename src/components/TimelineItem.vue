@@ -2,6 +2,7 @@
 
 import BaseSelect from "@/components/BaseSelect.vue";
 import {isTimelineItemValid} from "@/validators.js";
+import {ref} from "vue";
 
 const props = defineProps({
   timelineItem: {
@@ -22,7 +23,7 @@ const options = [
   {value: 3, label: 'Training'},
 ];
 
-const selectActivityId = 3
+const selectActivityId = ref(1)
 
 </script>
 
@@ -35,7 +36,12 @@ const selectActivityId = 3
     >
       {{ timelineItem.hour }}:00
     </a>
-    <BaseSelect :options="options" placeholder="Rest" :selected="selectActivityId"/>
+    <BaseSelect
+        :options="options"
+        placeholder="Rest"
+        :selected="selectActivityId"
+        @select="selectActivityId = $event"
+    />
   </li>
 </template>
 
