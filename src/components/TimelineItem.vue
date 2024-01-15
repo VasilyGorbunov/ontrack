@@ -23,7 +23,7 @@ const options = [
   {value: 3, label: 'Training'},
 ];
 
-const selectActivityId = ref(1)
+const selectActivityId = ref()
 
 </script>
 
