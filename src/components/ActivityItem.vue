@@ -10,7 +10,7 @@ import {isActivityValid, isUndefined} from "@/validators.js";
 
 defineProps({
   activity: {
-    type: String,
+    type: Object,
     required: true,
     validator: isActivityValid
   }
