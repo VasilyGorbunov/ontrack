@@ -1,5 +1,6 @@
 import {HOURS_IN_DAY, MIDNIGHT_HOUR, PAGE_TIMELINE, SECONDS_IN_HOUR} from "@/constants.js";
-import {isPageValid} from "@/validators.js";
+import {isNull, isPageValid} from "@/validators.js";
+
 
 export function normalizePageHash() {
     const page = window.location.hash.slice(1)
@@ -33,6 +34,10 @@ export function generateTimelineItems() {
 
 export function generateActivitySelectOptions(activities) {
     return activities.map(activity => ({label: activity.name, value: activity.id}));
+}
+
+export function normalizeSelectValue(value) {
+    return isNull(value) || isNaN(value) ? value : +value
 }
 
 

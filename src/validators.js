@@ -24,6 +24,10 @@ export function isNumberOrNull(value) {
     return isNumber(value) || isNull(value)
 }
 
+export function isSelectValueValid(value) {
+    return isNotEmptyString(value) || isNumberOrNull(value)
+}
+
 function isSelectOptionValid({value, label}) {
     return (isNumber(value) || isNotEmptyString(value)) && isNotEmptyString(label)
 }
@@ -60,7 +64,7 @@ function isString(value) {
     return typeof value === 'string'
 }
 
-function isNull(value) {
+export function isNull(value) {
     return value === null
 }
 
