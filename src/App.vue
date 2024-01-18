@@ -6,11 +6,17 @@ import TheNav from "@/components/TheNav.vue";
 import TheTimeline from "@/pages/TheTimeline.vue";
 import TheActivities from "@/pages/TheActivities.vue";
 import TheProgress from "@/pages/TheProgress.vue";
-import {generateActivitySelectOptions, generateTimelineItems, normalizePageHash} from "@/functions.js";
+import {
+  generateActivities,
+  generateActivitySelectOptions,
+  generateTimelineItems, id,
+  normalizePageHash
+} from "@/functions.js";
 
 const currentPage = ref(normalizePageHash())
 const timelineItems = generateTimelineItems()
-const activities = ref(['Coding', 'Reading', 'Training'])
+
+const activities = ref(generateActivities())
 
 const activitySelectOptions = generateActivitySelectOptions(activities.value);
 
@@ -22,8 +28,12 @@ function deleteActivity(activity) {
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
 
-function createActivity(activity) {
-  activities.value.push(activity)
+function createActivity(name) {
+  activities.value.push({
+    id: id(),
+    name,
+    secondsToComplete: 0
+  })
 }
 </script>
 
