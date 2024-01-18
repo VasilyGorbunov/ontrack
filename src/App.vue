@@ -9,7 +9,7 @@ import TheProgress from "@/pages/TheProgress.vue";
 import {
   generateActivities,
   generateActivitySelectOptions,
-  generateTimelineItems, id,
+  generateTimelineItems,
   normalizePageHash
 } from "@/functions.js";
 
@@ -28,12 +28,8 @@ function deleteActivity(activity) {
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
 
-function createActivity(name) {
-  activities.value.push({
-    id: id(),
-    name,
-    secondsToComplete: 0
-  })
+function createActivity(activity) {
+  activities.value.push(activity)
 }
 </script>
 
