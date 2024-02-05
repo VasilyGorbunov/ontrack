@@ -33,7 +33,7 @@ const secondsToComplete = ref(0)
     </div>
     <div>
       <BaseSelect class="font-mono"
-                  placeholder="h:mm"
+                  placeholder="hh:mm"
                   :options="PERIOD_SELECT_OPTIONS"
                   :selected="secondsToComplete"
                   @select="secondsToComplete = $event"
