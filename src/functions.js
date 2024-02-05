@@ -1,6 +1,6 @@
 import {
     HOURS_IN_DAY,
-    MIDNIGHT_HOUR,
+    MIDNIGHT_HOUR, MILLISECONDS_IN_SECOND,
     MINUTES_IN_HOUR,
     PAGE_TIMELINE,
     SECONDS_IN_HOUR,
@@ -37,7 +37,8 @@ export function generateTimelineItems() {
     for (let hour = MIDNIGHT_HOUR; hour < HOURS_IN_DAY; hour++) {
         timelineItems.push({
             hour,
-            activityId: null
+            activityId: null,
+            activitySeconds: 0
         })
     }
     return timelineItems
@@ -63,6 +64,16 @@ function generatePeriodSelectOptionsLabel(periodInMinutes) {
     const minutes = (periodInMinutes %  MINUTES_IN_HOUR).toString().padStart(2, 0)
 
     return `${hours}:${minutes}`
+}
+
+export function formatSeconds(seconds) {
+    const date = new Date()
+    date.setTime(Math.abs(seconds) * MILLISECONDS_IN_SECOND)
+
+    const utc = date.toUTCString()
+
+    return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6)
+
 }
 
 
