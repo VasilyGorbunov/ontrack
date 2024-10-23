@@ -5,9 +5,11 @@ import {
   ChartBarIcon,
 } from '@heroicons/vue/24/outline'
 import {PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS} from '../constants'
-
 import NavItem from './NavItem.vue'
-import { ref } from 'vue'
+
+defineProps(['currentPage'])
+
+const emit = defineEmits(['navigate'])
 
 const navItems = {
   [PAGE_TIMELINE]: ClockIcon,
@@ -15,18 +17,7 @@ const navItems = {
   [PAGE_PROGRESS]: ChartBarIcon,
 }
 
-const currentPage = ref(normalizePageHash())
 
-function normalizePageHash() {
-  const hash = window.location.hash.slice(1)
-
-  if(Object.keys(navItems).includes(hash)) {
-    return hash
-  }
-
-  window.location.hash = PAGE_TIMELINE
-  return PAGE_TIMELINE
-}
 
 </script>
 
@@ -38,7 +29,7 @@ function normalizePageHash() {
         v-for="(icon, page) in navItems"
         :href="`#${page}`"
         :class="{ 'pointer-events-none bg-gray-200': page === currentPage }"
-        @click="currentPage = page"
+        @click="emit('navigate', page)"
       >
         <component :is="icon" class="size-6" /> {{ page }}
       </NavItem>
