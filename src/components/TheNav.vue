@@ -1,14 +1,21 @@
 <script setup>
 import { NAV_ITEMS } from '@/constants'
 import NavItem from './NavItem.vue'
+import { isPageValid } from '@/validators'
 
-defineProps(['currentPage'])
+defineProps({
+  currentPage: {
+    type: String,
+    required: true,
+    validator: isPageValid,
+  },
+})
 
 const emit = defineEmits(['navigate'])
 </script>
 
 <template>
-  <nav class="sticky bottom-0 bg-white z-10">
+  <nav class="sticky bottom-0 z-10 bg-white">
     <ul class="flex items-center justify-around border-t">
       <NavItem
         :key="page"
