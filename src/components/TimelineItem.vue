@@ -1,5 +1,4 @@
 <script setup>
-import { HOURS_IN_DAY } from '@/constants'
 import BaseSelect from './BaseSelect.vue'
 import { isTimelineItemValid } from '@/validators'
 
