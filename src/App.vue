@@ -16,6 +16,8 @@ function goTo(page) {
 }
 
 const timelineItems = generateTimelineItems()
+
+const activities = ['Coding', 'Reading', 'Training']
 </script>
 
 <template>
@@ -25,7 +27,10 @@ const timelineItems = generateTimelineItems()
       v-show="currentPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
     />
-    <TheActivities v-show="currentPage === PAGE_ACTIVITIES" />
+    <TheActivities
+      v-show="currentPage === PAGE_ACTIVITIES"
+      :activities="activities"
+    />
     <TheProgress v-show="currentPage === PAGE_PROGRESS" />
   </main>
   <TheNav :current-page="currentPage" @navigate="goTo($event)" />

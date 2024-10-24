@@ -48,6 +48,18 @@ function isBetween(value, start, end) {
   return value => start && value <= end
 }
 
-function isHourValid(hour) {
+export function isHourValid(hour) {
   return isNumber(hour) && isBetween(hour, MIDNIGHT_HOUR, HOURS_IN_DAY - 1)
+}
+
+export function isActivityValid(activity) {
+  return isNotEmptyString(activity)
+}
+
+function isNotEmptyString(value) {
+  return isString(value) && value.length > 0
+}
+
+export function validateActivities(activities) {
+  return activities.every(isActivityValid)
 }
