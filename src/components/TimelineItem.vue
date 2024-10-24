@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import BaseSelect from './BaseSelect.vue'
 import { isTimelineItemValid } from '@/validators'
 
@@ -32,7 +33,7 @@ const options = [
   },
 ]
 
-const selectedActivityId = 2
+const selectedActivityId = ref(null)
 </script>
 
 <template>
@@ -42,6 +43,7 @@ const selectedActivityId = 2
       :options="options"
       placeholder="Rest"
       :selected="selectedActivityId"
+      @select="selectedActivityId = $event"
     />
   </li>
 </template>

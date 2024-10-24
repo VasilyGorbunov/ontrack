@@ -12,14 +12,23 @@ defineProps({
   placeholder: { type: String, required: true },
   selected: Number,
 })
+
+const emit = defineEmits({
+  select(value) {
+    return typeof value === 'number'
+  },
+})
 </script>
 
 <template>
   <div class="flex gap-2">
-    <BaseButton>
+    <BaseButton @click="emit('select', null)">
       <XMarkIcon class="size-8" />
     </BaseButton>
-    <select class="w-full px-2 py-1 text-2xl truncate bg-gray-100 rounded">
+    <select
+      class="w-full px-2 py-1 text-2xl truncate bg-gray-100 rounded"
+      @change="emit('select', +$event.target.value)"
+    >
       <option selected disabled value="">{{ placeholder }}</option>
       <option
         v-for="{ value, label } in options"
