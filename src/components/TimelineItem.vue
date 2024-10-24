@@ -33,7 +33,7 @@ const options = [
   },
 ]
 
-const selectedActivityId = ref(null)
+const selectedActivityId = ref(1)
 </script>
 
 <template>
