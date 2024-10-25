@@ -1,4 +1,9 @@
-import { HOURS_IN_DAY, MIDNIGHT_HOUR, NAV_ITEMS } from './constants'
+import {
+  BUTTON_TYPES,
+  HOURS_IN_DAY,
+  MIDNIGHT_HOUR,
+  NAV_ITEMS,
+} from './constants'
 
 export function isPageValid(page) {
   return Object.keys(NAV_ITEMS).includes(page)
@@ -62,4 +67,8 @@ function isNotEmptyString(value) {
 
 export function validateActivities(activities) {
   return activities.every(isActivityValid)
+}
+
+export function isButtonTypeValid(type) {
+  return BUTTON_TYPES.includes(type)
 }
