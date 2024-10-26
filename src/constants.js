@@ -26,18 +26,20 @@ export const NAV_ITEMS = {
 
 export const HOURS_IN_DAY = 24
 export const MIDNIGHT_HOUR = 0
+export const SECONDS_IN_HOUR = 3600
+export const MINUTES_IN_HOUR = 60
 
 export const PERIOD_SELECT_OPTIONS = [
   {
-    value: 15,
+    value: 15 * MINUTES_IN_HOUR,
     label: '0:15',
   },
   {
-    value: 30,
+    value: 30 * MINUTES_IN_HOUR,
     label: '0:30',
   },
   {
-    value: 45,
+    value: 45 * MINUTES_IN_HOUR,
     label: '0:45',
   },
 ]

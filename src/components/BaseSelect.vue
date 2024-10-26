@@ -16,7 +16,7 @@ const props = defineProps({
     validator: validateSelectOptions,
   },
   placeholder: { type: String, required: true },
-  selected: Number,
+  selected: [String, Number],
 })
 
 const emit = defineEmits({
@@ -24,16 +24,20 @@ const emit = defineEmits({
 })
 
 const isNotSelected = computed(() => isUndefinedOrNull(props.selected))
+
+function select(value) {
+  emit('select', normalizeSelectValue(value))
+}
 </script>
 
 <template>
   <div class="flex gap-2">
-    <BaseButton :type="BUTTON_TYPE_NEUTRAL" @click="emit('select', null)">
+    <BaseButton :type="BUTTON_TYPE_NEUTRAL" @click="select(null)">
       <XMarkIcon class="size-8" />
     </BaseButton>
     <select
       class="w-full px-2 py-1 text-2xl truncate bg-gray-100 rounded"
-      @change="emit('select', +$event.target.value)"
+      @change="select($event.target.value)"
     >
       <option :selected="isNotSelected" disabled value="">
         {{ placeholder }}

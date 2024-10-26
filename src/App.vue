@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 
@@ -7,6 +7,7 @@ import TheActivities from './pages/TheActivities.vue'
 import TheProgress from './pages/TheProgress.vue'
 import TheTimeline from './pages/TheTimeline.vue'
 import {
+  generateActivities,
   generateActivitySelectOptions,
   generateTimelineItems,
   normalizePageHash,
@@ -21,9 +22,11 @@ function goTo(page) {
 
 const timelineItems = generateTimelineItems()
 
-const activities = ref(['Coding', 'Reading', 'Training'])
+const activities = ref(generateActivities())
 
-const activitySelectOptions = generateActivitySelectOptions(activities.value)
+const activitySelectOptions = computed(() =>
+  generateActivitySelectOptions(activities.value),
+)
 
 function deleteActivity(activity) {
   activities.value.splice(activities.value.indexOf(activity), 1)

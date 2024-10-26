@@ -9,7 +9,7 @@ import { ref } from 'vue'
 defineProps({
   activity: {
     required: true,
-    type: String,
+    type: Object,
     validator: isActivityValid,
   },
 })
@@ -18,7 +18,7 @@ const emit = defineEmits({
   delete: isUndefined,
 })
 
-const secondsToComplete = ref(null)
+const secondsToComplete = ref(0)
 </script>
 
 <template>
@@ -27,7 +27,7 @@ const secondsToComplete = ref(null)
       <BaseButton :type="BUTTON_TYPE_DANGER" @click="emit('delete')">
         <TrashIcon class="size-8" />
       </BaseButton>
-      <span class="text-xl truncate">{{ activity }}</span>
+      <span class="text-xl truncate">{{ activity.name }}</span>
     </div>
 
     <div>
