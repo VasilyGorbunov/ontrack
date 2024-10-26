@@ -7,6 +7,7 @@ import {
   validateSelectOptions,
 } from '@/validators'
 import { computed } from 'vue'
+import { BUTTON_TYPE_NEUTRAL } from '@/constants'
 
 const props = defineProps({
   options: {
@@ -27,7 +28,7 @@ const isNotSelected = computed(() => isUndefinedOrNull(props.selected))
 
 <template>
   <div class="flex gap-2">
-    <BaseButton @click="emit('select', null)">
+    <BaseButton :type="BUTTON_TYPE_NEUTRAL" @click="emit('select', null)">
       <XMarkIcon class="size-8" />
     </BaseButton>
     <select
