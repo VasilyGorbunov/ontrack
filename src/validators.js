@@ -33,7 +33,7 @@ export function isUndefinedOrNull(value) {
   return isNull(value) || isUndefined(value)
 }
 
-function isNull(value) {
+export function isNull(value) {
   return value === null
 }
 
@@ -75,4 +75,8 @@ export function validateActivities(activities) {
 
 export function isButtonTypeValid(type) {
   return BUTTON_TYPES.includes(type)
+}
+
+export function isSelectValueValid(value) {
+  return isNotEmptyString(value) || isNumberOrNull(value)
 }
