@@ -16,9 +16,8 @@ import { PAGE_PROGRESS, PAGE_TIMELINE, PAGE_ACTIVITIES } from './constants'
 
 const currentPage = ref(normalizePageHash())
 
-function goTo(page) {
-  currentPage.value = page
-}
+const timeline = ref()
+
 const activities = ref(generateActivities())
 
 const timelineItems = ref(generateTimelineItems(activities.value))
@@ -26,6 +25,18 @@ const timelineItems = ref(generateTimelineItems(activities.value))
 const activitySelectOptions = computed(() =>
   generateActivitySelectOptions(activities.value),
 )
+
+function goTo(page) {
+  if(currentPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE) {
+    timeline.value.scrollToHour()
+  }
+
+  if(page !== PAGE_TIMELINE) {
+    document.body.scrollIntoView()
+  }
+
+  currentPage.value = page
+}
 
 function deleteActivity(activity) {
   timelineItems.value.forEach(timelineItem => {
@@ -54,6 +65,7 @@ function setActivitySecondsToComplete(activity, secondsToComplete) {
   <TheHeader @navigate="goTo($event)" />
   <main class="flex flex-col flex-grow">
     <TheTimeline
+      ref="timeline"
       v-show="currentPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
       :activity-select-options="activitySelectOptions"
