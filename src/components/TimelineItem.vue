@@ -8,6 +8,7 @@ import {
   validateActivities,
   validateSelectOptions,
 } from '@/validators'
+import TimelineStopwatch from './TimelineStopwatch.vue'
 
 const props = defineProps({
   timelineItem: {
@@ -51,5 +52,6 @@ function findActivityById(id) {
       :selected="timelineItem.activityId"
       @select="selectActivity"
     />
+    <TimelineStopwatch :seconds="timelineItem.activitySeconds" />
   </li>
 </template>
