@@ -59,6 +59,7 @@ function setTimelineItemActivity(timelineItem, activity) {
 function setActivitySecondsToComplete(activity, secondsToComplete) {
   activity.secondsToComplete = secondsToComplete
 }
+
 </script>
 
 <template>
