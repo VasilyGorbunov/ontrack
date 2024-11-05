@@ -9,12 +9,11 @@ import TheTimeline from './pages/TheTimeline.vue'
 import {
   generateActivities,
   generateActivitySelectOptions,
+  generatePeriodSelectOptions,
   generateTimelineItems,
   normalizePageHash,
 } from './functions'
-import { PAGE_PROGRESS, PAGE_TIMELINE, PAGE_ACTIVITIES } from './constants'
-
-provide('updateTimeLineItemActivitySeconds', updateTimeLineItemActivitySeconds)
+import {PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE} from './constants'
 
 const currentPage = ref(normalizePageHash())
 
@@ -29,11 +28,11 @@ const activitySelectOptions = computed(() =>
 )
 
 function goTo(page) {
-  if(currentPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE) {
+  if (currentPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE) {
     timeline.value.scrollToHour()
   }
 
-  if(page !== PAGE_TIMELINE) {
+  if (page !== PAGE_TIMELINE) {
     document.body.scrollIntoView()
   }
 
@@ -66,29 +65,32 @@ function setActivitySecondsToComplete(activity, secondsToComplete) {
   activity.secondsToComplete = secondsToComplete
 }
 
+provide('updateTimeLineItemActivitySeconds', updateTimeLineItemActivitySeconds)
+provide('activitySelectOptions', activitySelectOptions.value)
+provide('periodSelectOptions', generatePeriodSelectOptions())
+provide('timelineItems', timelineItems.value)
+provide('activities', activities.value)
+
 </script>
 
 <template>
-  <TheHeader @navigate="goTo($event)" />
+  <TheHeader @navigate="goTo($event)"/>
   <main class="flex flex-col flex-grow">
     <TheTimeline
       ref="timeline"
       v-show="currentPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
-      :activity-select-options="activitySelectOptions"
-      :activities="activities"
       :current-page="currentPage"
       @set-timeline-item-activity="setTimelineItemActivity"
     />
     <TheActivities
       v-show="currentPage === PAGE_ACTIVITIES"
       :activities="activities"
-      :timeline-items="timelineItems"
       @delete-activity="deleteActivity"
       @create-activity="createActivity"
       @set-activity-seconds-to-complete="setActivitySecondsToComplete"
     />
-    <TheProgress v-show="currentPage === PAGE_PROGRESS" />
+    <TheProgress v-show="currentPage === PAGE_PROGRESS"/>
   </main>
-  <TheNav :current-page="currentPage" @navigate="goTo($event)" />
+  <TheNav :current-page="currentPage" @navigate="goTo($event)"/>
 </template>

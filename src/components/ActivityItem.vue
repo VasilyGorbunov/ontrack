@@ -1,23 +1,21 @@
 <script setup>
 import BaseButton from '@/components/BaseButton.vue'
 import BaseSelect from '@/components/BaseSelect.vue'
-import {BUTTON_TYPE_DANGER, PERIOD_SELECT_OPTIONS} from '@/constants'
-import {isActivityValid, isNumber, isUndefined, validateTimelineItems} from '@/validators'
+import {BUTTON_TYPE_DANGER} from '@/constants'
+import {isActivityValid, isNumber, isUndefined} from '@/validators'
 import {TrashIcon} from '@heroicons/vue/24/outline'
 import ActivitySecondsToComplete from "@/components/ActivitySecondsToComplete.vue";
+import {inject} from "vue";
 
 defineProps({
   activity: {
     required: true,
     type: Object,
     validator: isActivityValid,
-  },
-  timelineItems: {
-    type: Array,
-    required: true,
-    validator: validateTimelineItems,
-  },
+  }
 })
+
+const periodSelectOptions = inject('periodSelectOptions')
 
 const emit = defineEmits({
   setSecondsToComplete: isNumber,
@@ -38,14 +36,13 @@ const emit = defineEmits({
       <BaseSelect
         class="font-mono grow"
         placeholder="hh:mm"
-        :options="PERIOD_SELECT_OPTIONS"
+        :options="periodSelectOptions"
         :selected="activity.secondsToComplete || null"
         @select="emit('setSecondsToComplete', $event || 0)"
       />
       <ActivitySecondsToComplete
         v-if="activity.secondsToComplete"
         :activity="activity"
-        :timeline-items="timelineItems"
       />
     </div>
   </li>
