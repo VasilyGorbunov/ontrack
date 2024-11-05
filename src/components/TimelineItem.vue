@@ -1,5 +1,5 @@
 <script setup>
-import { NULLABLE_ACTIVITY } from '@/constants'
+import {NULLABLE_ACTIVITY} from '@/constants'
 import BaseSelect from './BaseSelect.vue'
 import TimelineHour from './TimelineHour.vue'
 import {
@@ -55,8 +55,7 @@ function findActivityById(id) {
       @select="selectActivity"
     />
     <TimelineStopwatch
-      :seconds="timelineItem.activitySeconds"
-      :hour="timelineItem.hour"
+      :timeline-item="timelineItem"
     />
   </li>
 </template>

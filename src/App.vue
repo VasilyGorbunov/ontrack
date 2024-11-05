@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import {computed, provide, ref} from 'vue'
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
 
@@ -13,6 +13,8 @@ import {
   normalizePageHash,
 } from './functions'
 import { PAGE_PROGRESS, PAGE_TIMELINE, PAGE_ACTIVITIES } from './constants'
+
+provide('updateTimeLineItemActivitySeconds', updateTimeLineItemActivitySeconds)
 
 const currentPage = ref(normalizePageHash())
 
@@ -54,6 +56,10 @@ function createActivity(activity) {
 
 function setTimelineItemActivity(timelineItem, activity) {
   timelineItem.activityId = activity.id
+}
+
+function updateTimeLineItemActivitySeconds(timelineItem, activitySeconds) {
+  timelineItem.activitySeconds += activitySeconds
 }
 
 function setActivitySecondsToComplete(activity, secondsToComplete) {
