@@ -53,8 +53,8 @@ function createActivity(activity) {
   activities.value.push(activity)
 }
 
-function setTimelineItemActivity(timelineItem, activity) {
-  timelineItem.activityId = activity.id
+function setTimelineItemActivity(timelineItem, activityId) {
+  timelineItem.activityId = activityId
 }
 
 function updateTimeLineItemActivitySeconds(timelineItem, activitySeconds) {
@@ -69,7 +69,10 @@ provide('updateTimeLineItemActivitySeconds', updateTimeLineItemActivitySeconds)
 provide('activitySelectOptions', activitySelectOptions.value)
 provide('periodSelectOptions', generatePeriodSelectOptions())
 provide('timelineItems', timelineItems.value)
-provide('activities', activities.value)
+provide('setTimelineItemActivity', setTimelineItemActivity)
+provide('setActivitySecondsToComplete', setActivitySecondsToComplete)
+provide('createActivity', createActivity)
+provide('deleteActivity', deleteActivity)
 
 </script>
 
@@ -81,14 +84,10 @@ provide('activities', activities.value)
       v-show="currentPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
       :current-page="currentPage"
-      @set-timeline-item-activity="setTimelineItemActivity"
     />
     <TheActivities
       v-show="currentPage === PAGE_ACTIVITIES"
       :activities="activities"
-      @delete-activity="deleteActivity"
-      @create-activity="createActivity"
-      @set-activity-seconds-to-complete="setActivitySecondsToComplete"
     />
     <TheProgress v-show="currentPage === PAGE_PROGRESS"/>
   </main>
