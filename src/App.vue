@@ -13,7 +13,7 @@ import {
   generateTimelineItems,
 } from './functions'
 import {PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE} from './constants'
-import {currentPage, navigate, timelineRef} from "@/router.js";
+import {currentPage, timelineRef} from "@/router.js";
 
 
 const activities = ref(generateActivities())
@@ -64,13 +64,12 @@ provide('deleteActivity', deleteActivity)
 </script>
 
 <template>
-  <TheHeader @navigate="navigate"/>
+  <TheHeader/>
   <main class="flex flex-col flex-grow">
     <TheTimeline
       ref="timelineRef"
       v-show="currentPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
-      :current-page="currentPage"
     />
     <TheActivities
       v-show="currentPage === PAGE_ACTIVITIES"
@@ -78,5 +77,5 @@ provide('deleteActivity', deleteActivity)
     />
     <TheProgress v-show="currentPage === PAGE_PROGRESS"/>
   </main>
-  <TheNav :current-page="currentPage" @navigate="navigate"/>
+  <TheNav/>
 </template>
