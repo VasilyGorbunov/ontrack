@@ -1,23 +1,6 @@
-import {
-  HOURS_IN_DAY,
-  MILLISECONDS_IN_SECOND,
-  MINUTES_IN_HOUR,
-  PAGE_TIMELINE,
-  SECONDS_IN_HOUR,
-  SECONDS_IN_MINUTE,
-} from './constants'
-import { isNull, isPageValid } from './validators'
+import { HOURS_IN_DAY, MILLISECONDS_IN_SECOND, MINUTES_IN_HOUR, SECONDS_IN_HOUR, SECONDS_IN_MINUTE } from './constants'
+import { isNull } from './validators'
 
-export function normalizePageHash() {
-  const page = window.location.hash.slice(1)
-
-  if (isPageValid(page)) {
-    return page
-  }
-
-  window.location.hash = PAGE_TIMELINE
-  return PAGE_TIMELINE
-}
 
 export function generateTimelineItems(activities) {
   return [...Array(HOURS_IN_DAY).keys()].map(hour => ({
